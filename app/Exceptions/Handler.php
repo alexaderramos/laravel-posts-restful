@@ -2,11 +2,16 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponse;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
     /**
      * A list of the exception types that are not reported.
      *
@@ -42,10 +47,29 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function render($request, Exception $exception)
     {
+        #dd($exception);
+
+        if (env('APP_ENV')=='local'){
+            return parent::render($request, $exception);
+        }
+
+
+        if ($exception instanceof NotFoundHttpException) //404
+        {
+            return $this->errorResponse(null,404,"Pagina no encontrada");
+        }
+
+        if ($exception instanceof ModelNotFoundException) //404
+        {
+            return $this->errorResponse(null,404,"Recurso no encontrado");
+        }
+
         return parent::render($request, $exception);
+
+
     }
 }
