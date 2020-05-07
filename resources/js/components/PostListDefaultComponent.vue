@@ -17,7 +17,7 @@
         <post-modal-component :post="postSelected"></post-modal-component>
     </div>
     <div class="row mt-3" v-if="total > 0">
-        <div class="col-md-12">
+        <div class="mx-auto">
             <v-pagination
                 v-model="currentPage"
                 :page-count="total"

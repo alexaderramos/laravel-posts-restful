@@ -1928,8 +1928,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCategoryComponent",
   created: function created() {
@@ -38439,9 +38437,7 @@ var render = function() {
         _c("post-category-default-component", {
           attrs: { posts: _vm.posts, total: _vm.total },
           on: { getCurrentPage: _vm.getCurrentPage }
-        }),
-        _vm._v(" "),
-        _c("router-link", { attrs: { to: "/" } }, [_vm._v("Inicio")])
+        })
       ],
       1
     )
@@ -38475,53 +38471,49 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      [
-        _vm._l(_vm.posts, function(post) {
-          return _c("div", { key: post.title, staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: { src: "/images/" + post.image, alt: "" }
-              }),
+      _vm._l(_vm.posts, function(post) {
+        return _c("div", { key: post.title, staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("img", {
+              staticClass: "card-img-top",
+              attrs: { src: "/images/" + post.image, alt: "" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("h4", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(post.title))
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(post.title))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(post.content.slice(0, 200)))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.postClick(post)
-                      }
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(_vm._s(post.content.slice(0, 200)))
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.postClick(post)
                     }
-                  },
-                  [_vm._v("Ver resumen")]
-                )
-              ])
+                  }
+                },
+                [_vm._v("Ver resumen")]
+              )
             ])
           ])
-        }),
-        _vm._v(" "),
-        _c("router-link", { attrs: { to: "/" } }, [_vm._v("Inicio")])
-      ],
-      2
+        ])
+      }),
+      0
     ),
     _vm._v(" "),
     _vm.total > 0
       ? _c("div", { staticClass: "row mt-3" }, [
           _c(
             "div",
-            { staticClass: "col-md-12" },
+            { staticClass: "mx-auto" },
             [
               _c("v-pagination", {
                 attrs: {
@@ -38737,7 +38729,7 @@ var render = function() {
       ? _c("div", { staticClass: "row mt-3" }, [
           _c(
             "div",
-            { staticClass: "col-md-12" },
+            { staticClass: "mx-auto" },
             [
               _c("v-pagination", {
                 attrs: {

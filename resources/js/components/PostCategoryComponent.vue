@@ -8,8 +8,6 @@
             @getCurrentPage="getCurrentPage"
         ></post-category-default-component>
 
-        <router-link to="/">Inicio</router-link>
-
     </div>
 </div>
 </template>
