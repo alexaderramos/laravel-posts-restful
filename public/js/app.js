@@ -1850,30 +1850,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCategoryComponent",
   created: function created() {
-    this.getPost();
+    this.getPosts();
   },
   data: function data() {
     return {
       posts: [],
-      category: ""
+      category: "",
+      total: 0,
+      currentPage: 1
     };
   },
   methods: {
     postClick: function postClick(post) {//this.postSelected = post
     },
-    getPost: function getPost() {
+    getPosts: function getPosts() {
       var _this = this;
 
-      var url = "/api/post/" + this.$route.params.category_id + "/category";
+      var url = "/api/post/" + this.$route.params.category_id + "/category?page=" + this.currentPage;
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (json) {
         _this.posts = json.data.posts.data;
+        _this.total = json.data.posts.last_page;
         _this.category = json.data.category;
       });
+    },
+    getCurrentPage: function getCurrentPage(currentPage) {
+      this.currentPage = currentPage;
+      this.getPosts();
     }
   }
 });
@@ -1889,6 +1902,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_plain_pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-plain-pagination */ "./node_modules/vue-plain-pagination/dist/vue-plain-pagination.umd.min.js");
+/* harmony import */ var vue_plain_pagination__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_plain_pagination__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1911,17 +1926,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCategoryDefaultComponent",
-  props: ['posts'],
-  created: function created() {},
+  props: ['posts', 'total', 'pCurrentPage'],
+  components: {
+    vPagination: vue_plain_pagination__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  created: function created() {
+    this.currentPage = this.pCurrentPage;
+  },
   data: function data() {
     return {
+      currentPage: 1,
+      bootstrapPaginationClasses: {
+        ul: 'pagination',
+        li: 'page-item',
+        liActive: 'active',
+        liDisable: 'disabled',
+        button: 'page-link'
+      },
+      paginationAnchorTexts: {
+        first: '&laquo;',
+        prev: '&lsaquo;',
+        next: '&rsaquo;',
+        last: '&raquo;'
+      },
       category: ""
     };
   },
   methods: {
     postClick: function postClick(post) {//this.postSelected = post
+    }
+  },
+  watch: {
+    currentPage: function currentPage(newVal, oldVal) {
+      console.log(newVal);
+      this.$emit('getCurrentPage', newVal);
     }
   }
 });
@@ -37495,7 +37546,15 @@ var render = function() {
       "div",
       { staticClass: "row" },
       [
-        _c("post-category-default-component", { attrs: { posts: _vm.posts } }),
+        _c("post-category-default-component", {
+          key: _vm.currentPage,
+          attrs: {
+            pCurrentPage: _vm.currentPage,
+            posts: _vm.posts,
+            total: _vm.total
+          },
+          on: { getCurrentPage: _vm.getCurrentPage }
+        }),
         _vm._v(" "),
         _c("router-link", { attrs: { to: "/" } }, [_vm._v("Inicio")])
       ],
@@ -37546,7 +37605,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(post.content))
+                  _vm._v(_vm._s(post.content.slice(0, 200)))
                 ]),
                 _vm._v(" "),
                 _c(
@@ -37571,7 +37630,33 @@ var render = function() {
         _c("router-link", { attrs: { to: "/" } }, [_vm._v("Inicio")])
       ],
       2
-    )
+    ),
+    _vm._v(" "),
+    _vm.total > 0
+      ? _c("div", { staticClass: "row mt-3" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-12" },
+            [
+              _c("v-pagination", {
+                attrs: {
+                  "page-count": _vm.total,
+                  classes: _vm.bootstrapPaginationClasses,
+                  labels: _vm.paginationAnchorTexts
+                },
+                model: {
+                  value: _vm.currentPage,
+                  callback: function($$v) {
+                    _vm.currentPage = $$v
+                  },
+                  expression: "currentPage"
+                }
+              })
+            ],
+            1
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
