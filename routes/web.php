@@ -52,3 +52,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Rutas para unir las rutas de vue-router
 Route::get('/detail/{id}','web\WebController@detail');
 Route::get('/post-category/{id}','web\WebController@post_category');
+Route::get('/contact','web\WebController@contact');
