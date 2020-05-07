@@ -2,6 +2,8 @@
 <div class="row">
 
     <post-list-default-component
+        :key="currentPage"
+        :pCurrentPage="currentPage"
         :posts="posts"
         :total="total"
         @getCurrentPage="getCurrentPage"

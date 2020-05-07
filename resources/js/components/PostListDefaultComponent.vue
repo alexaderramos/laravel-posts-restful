@@ -33,10 +33,10 @@
     import vPagination from 'vue-plain-pagination'
     export default {
         name: "PostListDefaultComponent",
-        props:['posts','total'],
+        props:['posts','total','pCurrentPage'],
         components: { vPagination },
         created() {
-
+            this.currentPage = this.pCurrentPage
         },
         data(){
             return{

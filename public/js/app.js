@@ -2014,6 +2014,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostListComponent",
   created: function created() {
@@ -2097,11 +2099,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostListDefaultComponent",
-  props: ['posts', 'total'],
+  props: ['posts', 'total', 'pCurrentPage'],
   components: {
     vPagination: vue_plain_pagination__WEBPACK_IMPORTED_MODULE_0___default.a
   },
-  created: function created() {},
+  created: function created() {
+    this.currentPage = this.pCurrentPage;
+  },
   data: function data() {
     return {
       postSelected: "",
@@ -37663,7 +37667,12 @@ var render = function() {
     { staticClass: "row" },
     [
       _c("post-list-default-component", {
-        attrs: { posts: _vm.posts, total: _vm.total },
+        key: _vm.currentPage,
+        attrs: {
+          pCurrentPage: _vm.currentPage,
+          posts: _vm.posts,
+          total: _vm.total
+        },
         on: { getCurrentPage: _vm.getCurrentPage }
       }),
       _vm._v(" "),
