@@ -19,7 +19,7 @@ class PostController extends ApiResponseController /*Controller*/
             join('post_images','post_images.post_id','=','posts.id')
             ->join('categories','categories.id','=','posts.category_id')
             ->select('posts.*','categories.title as category','post_images.image')
-            ->orderBy('post_images.created_at','desc')->paginate(1);
+            ->orderBy('post_images.created_at','desc')->paginate(10);
         //return response()->json($post);
         return $this->successResponse($post);
     }
@@ -28,7 +28,7 @@ class PostController extends ApiResponseController /*Controller*/
 
     public function show(Post $post)
     {
-        $post->image;
+        $post->url_image=$post->url_image();
         $post->category;
         //return response()->json($post,200);
 
@@ -42,9 +42,22 @@ class PostController extends ApiResponseController /*Controller*/
 
     public function category(Category $category)
     {
-        return $this->successResponse(array(
+        /*return $this->successResponse(array(
            "posts"=> $category->posts()->paginate(10),
             "category"=>$category
+        ));*/
+
+        $post = Post::
+        join('post_images','post_images.post_id','=','posts.id')
+            ->join('categories','categories.id','=','posts.category_id')
+            ->select('posts.*','categories.title as category','post_images.image')
+            ->orderBy('post_images.created_at','desc')
+            ->where('categories.id',$category->id)
+            ->paginate(10);
+
+        return $this->successResponse(array(
+            "posts"=>$post,
+            "category" => $category
         ));
     }
 

@@ -18,4 +18,8 @@ class Post extends Model
         return $this->hasOne(PostImage::class);
     }
 
+    public function  url_image(){
+        return url('/').'/images/'.$this->image->image;
+    }
+
 }

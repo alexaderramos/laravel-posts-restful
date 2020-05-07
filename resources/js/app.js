@@ -6,7 +6,10 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+
+
+//vue-router
+import router from './router/router.js'
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +22,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('post-modal-component', require('./components/PostModalComponent.vue').default);
+Vue.component('post-list-default-component', require('./components/PostListDefaultComponent').default);
+Vue.component('post-category-default-component', require('./components/PostCategoryDefaultComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +35,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router
 });

@@ -11,6 +11,8 @@
 |
  */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -41,7 +43,12 @@ Route::post('dashboard/post/{post}/image', 'dashboard\PostController@image')->na
 
 Route::resource('dashboard/category', 'dashboard\CategoryController');
 
+Route::get('/','web\WebController@index')->name('index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Rutas para unir las rutas de vue-router
+Route::get('/detail/{id}','web\WebController@detail');
+Route::get('/post-category/{id}','web\WebController@post_category');

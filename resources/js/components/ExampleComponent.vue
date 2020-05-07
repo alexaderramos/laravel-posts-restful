@@ -11,6 +11,8 @@
                 </div>
             </div>
         </div>
+        <router-link to="/">Inicio</router-link> /
+        <router-link to="/example">Example</router-link>
     </div>
 </template>
 
