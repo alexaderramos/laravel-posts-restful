@@ -1,7 +1,11 @@
 <template>
 <div class="row">
 
-    <post-list-default-component :posts="posts" :total="total"></post-list-default-component>
+    <post-list-default-component
+        :posts="posts"
+        :total="total"
+        @getCurrentPage="getCurrentPage"
+    ></post-list-default-component>
     <router-link to="/">Inicio</router-link>
 </div>
 </template>
@@ -32,6 +36,9 @@
                         this.posts = json.data.data;
                         this.total = json.data.last_page;
                     });
+            },
+            getCurrentPage(currentPage){
+                console.log("currentPage:"+currentPage)
             }
         }
     }

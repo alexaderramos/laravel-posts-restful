@@ -2010,6 +2010,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostListComponent",
   created: function created() {
@@ -2036,6 +2040,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.posts = json.data.data;
         _this.total = json.data.last_page;
       });
+    },
+    getCurrentPage: function getCurrentPage(currentPage) {
+      console.log("currentPage:" + currentPage);
     }
   }
 });
@@ -2120,6 +2127,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     currentPage: function currentPage(newVal, oldVal) {
       console.log(newVal);
+      this.$emit('getCurrentPage', newVal);
     }
   }
 });
@@ -37652,7 +37660,8 @@ var render = function() {
     { staticClass: "row" },
     [
       _c("post-list-default-component", {
-        attrs: { posts: _vm.posts, total: _vm.total }
+        attrs: { posts: _vm.posts, total: _vm.total },
+        on: { getCurrentPage: _vm.getCurrentPage }
       }),
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/" } }, [_vm._v("Inicio")])

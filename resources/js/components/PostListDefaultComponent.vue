@@ -65,6 +65,7 @@
         watch:{
             currentPage(newVal, oldVal){
                 console.log(newVal)
+                this.$emit('getCurrentPage',newVal);
             }
         }
     }
