@@ -1,7 +1,7 @@
 <template>
 <div class="row">
 
-    <post-list-default-component :posts="posts" ></post-list-default-component>
+    <post-list-default-component :posts="posts" :total="total"></post-list-default-component>
     <router-link to="/">Inicio</router-link>
 </div>
 </template>
@@ -15,7 +15,8 @@
         data(){
             return{
                 postSelected:"",//{title:'',content:''},
-                posts:[]
+                posts:[],
+                total:0
             }
         },
         methods:{
@@ -29,6 +30,7 @@
                     })
                     .then( (json) => {
                         this.posts = json.data.data;
+                        this.total = json.data.last_page;
                     });
             }
         }
