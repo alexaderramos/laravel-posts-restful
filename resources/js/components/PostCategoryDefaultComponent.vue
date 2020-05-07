@@ -34,10 +34,10 @@
     import vPagination from 'vue-plain-pagination'
     export default {
         name: "PostCategoryDefaultComponent",
-        props:['posts','total','pCurrentPage'],
+        props:['posts','total'],
         components: { vPagination },
         created() {
-            this.currentPage = this.pCurrentPage
+
         },
         data(){
             return{

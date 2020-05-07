@@ -3,8 +3,6 @@
     <h1>{{category.title}}</h1>
     <div class="row">
         <post-category-default-component
-            :key="currentPage"
-            :pCurrentPage="currentPage"
             :posts="posts"
             :total="total"
             @getCurrentPage="getCurrentPage"
