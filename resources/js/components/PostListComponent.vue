@@ -14,21 +14,23 @@
     export default {
         name: "PostListComponent",
         created() {
-            this.getPost();
+            this.getPosts();
         },
         data(){
             return{
                 postSelected:"",//{title:'',content:''},
                 posts:[],
-                total:0
+                total:0,
+                currentPage:1
             }
         },
         methods:{
             postClick(post){
                 this.postSelected = post
             },
-            getPost(){
-                fetch('/api/post')
+            getPosts(){
+                let url='/api/post?page='+this.currentPage
+                fetch(url)
                     .then(response => {
                         return response.json();
                     })
@@ -38,7 +40,8 @@
                     });
             },
             getCurrentPage(currentPage){
-                console.log("currentPage:"+currentPage)
+                this.currentPage = currentPage;
+                this.getPosts();
             }
         }
     }

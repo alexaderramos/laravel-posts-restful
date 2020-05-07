@@ -2017,24 +2017,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostListComponent",
   created: function created() {
-    this.getPost();
+    this.getPosts();
   },
   data: function data() {
     return {
       postSelected: "",
       //{title:'',content:''},
       posts: [],
-      total: 0
+      total: 0,
+      currentPage: 1
     };
   },
   methods: {
     postClick: function postClick(post) {
       this.postSelected = post;
     },
-    getPost: function getPost() {
+    getPosts: function getPosts() {
       var _this = this;
 
-      fetch('/api/post').then(function (response) {
+      var url = '/api/post?page=' + this.currentPage;
+      fetch(url).then(function (response) {
         return response.json();
       }).then(function (json) {
         _this.posts = json.data.data;
@@ -2042,7 +2044,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getCurrentPage: function getCurrentPage(currentPage) {
-      console.log("currentPage:" + currentPage);
+      this.currentPage = currentPage;
+      this.getPosts();
     }
   }
 });
@@ -37713,7 +37716,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(post.content))
+                    _vm._v(_vm._s(post.content.slice(1, 200) + "..."))
                   ]),
                   _vm._v(" "),
                   _c(
