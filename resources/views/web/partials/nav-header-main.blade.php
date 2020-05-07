@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
-    <a class="navbar-brand" href="{{ route('home') }}">Larablog</a>
+{{--    <a class="navbar-brand" href="{{ route('home') }}">Larablog</a>--}}
+    <router-link to="/" class="navbar-brand">ApiRestFull</router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,7 +9,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                Home
+                <router-link to="/" class="nav-link ">Inicio</router-link>
+
+            </li>
+            <li class="nav-item dropdown">
+                <router-link :to="{name:'contact'}" class="nav-link ">Contacto</router-link>
+
             </li>
         </ul>
 

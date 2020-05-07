@@ -9,7 +9,7 @@
 
             <!-- Grid column -->
             <div class="col-md-12 py-5">
-                <div class="mb-5 flex-center">
+                <div class="mb-5">
 
                     <!-- Facebook -->
                     <a class="fb-ic">
@@ -47,7 +47,8 @@
 
     <!-- Copyright -->
     <div class="footer-copyright bg-dark2 text-center py-3" >© {{date('Y')}} Copyright:
-        <a href="#"> Alexander R</a>
+        <router-link to="/" class="text-white"><u>Inicio</u></router-link>
+        <router-link :to="{name:'contact'}" class="text-white"><u>Contacto</u></router-link>
     </div>
     <!-- Copyright -->
 

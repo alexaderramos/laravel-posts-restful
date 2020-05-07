@@ -10652,3 +10652,7 @@ a.text-dark:focus {
   background-color: #046972;
 }
 
+a.router-link-exact-active {
+  color: #ffffff !important;
+}
+
